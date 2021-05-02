@@ -39,5 +39,17 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpPost("Delete")]
+        public IActionResult Delete(ProductImage productImage)
+        {
+            var result = _productImageService.Delete(productImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

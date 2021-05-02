@@ -28,6 +28,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ProductImageManager>().As<IProductImageService>();
             builder.RegisterType<EfProductImageDal>().As<IProductImageDal>();
             
+            builder.RegisterType<CategoryManager>().As<ICategoryService>();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
+            
             builder.RegisterType<BannerManager>().As<IBannerService>();
             builder.RegisterType<EfBannerDal>().As<IBannerDal>();
             
