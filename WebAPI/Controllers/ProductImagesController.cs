@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using System.Reflection;
+using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,18 @@ namespace WebAPI.Controllers
         {
             _productImageService = productImageService;
         }
+
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            var result = _productImageService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
         
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] ProductImage carImage)
@@ -28,10 +41,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        [HttpPost("Delete")]
+        public IActionResult Delete(ProductImage productImage)
         {
-            var result = _productImageService.GetAll();
+            var result = _productImageService.Delete(productImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,11 +52,11 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
-
-        [HttpPost("Delete")]
-        public IActionResult Delete(ProductImage productImage)
+        
+        [HttpPost("Update")]
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm] ProductImage carImage)
         {
-            var result = _productImageService.Delete(productImage);
+            var result = _productImageService.Update(file, carImage);
             if (result.Success)
             {
                 return Ok(result);

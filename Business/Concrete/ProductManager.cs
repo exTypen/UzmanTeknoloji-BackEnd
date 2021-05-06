@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -26,14 +28,37 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails());
         }
 
+        public IDataResult<List<ProductDto>> GetLimitedProductDetails(int limit)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().GetRange(0,limit));
+        }
+
+
+        public IDataResult<List<ProductDto>> GetAllProductDetailsById(int id)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.Id == id));
+        }
+
         public IDataResult<List<ProductDto>> GetAllProductDetailsByCategory(int categoryId)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.CategoryId == categoryId));
         }
 
+        public IDataResult<List<ProductDto>> GetLimitedProductDetailsByCategory(int categoryId, int limit)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal
+                .GetAllProductDetails(p => p.CategoryId == categoryId).GetRange(0, limit));
+        }
+
         public IDataResult<List<ProductDto>> GetAllProductDetailsByBrand(int brandId)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.BrandId == brandId));
+        }
+
+        public IDataResult<List<ProductDto>> GetLimitedProductDetailsByBrand(int brandId, int limit)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.BrandId == brandId)
+                .GetRange(0, limit));
         }
 
         public IDataResult<List<Product>> GetAllByCategory(int categoryId)
@@ -60,5 +85,3 @@ namespace Business.Concrete
         }
     }
 }
-
-//github deneme
