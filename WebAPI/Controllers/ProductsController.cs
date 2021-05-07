@@ -38,6 +38,31 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         
+        [HttpGet("GetAllProductDetailsByPage")]
+        public IActionResult GetAllProductDetailsByPage(int page, int pageSize)
+        {
+            var result = _productService.GetAllProductDetailsWithPage(page, pageSize);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        
+
+        [HttpGet("GetLimitedProductDetails")]
+        public IActionResult GetLimitedProductDetails(int limit)
+        {
+            var result = _productService.GetLimitedProductDetails(limit);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        
         [HttpGet("GetAllProductDetailsById")]
         public IActionResult GetAllProductDetailsById(int id)
         {
@@ -50,5 +75,40 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         
+        [HttpGet("GetAllByCategory")]
+        public IActionResult GetAllByCategory(int id)
+        {
+            var result = _productService.GetAllByCategory(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        
+        [HttpGet("GetAllProductDetailsFilteredByPage")]
+        public IActionResult GetAllProductDetailsFilteredByPage(int brandId, int categoryId, int page, int pageSize)
+        {
+            var result = _productService.GetAllProductDetailsFilteredWithPage(brandId, categoryId, page, pageSize);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        
+        [HttpGet("GetLimitedProductDetailsByCategory")]
+        public IActionResult GetLimitedProductDetailsByCategory(int id, int limit)
+        {
+            var result = _productService.GetLimitedProductDetailsByCategory(id, limit);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

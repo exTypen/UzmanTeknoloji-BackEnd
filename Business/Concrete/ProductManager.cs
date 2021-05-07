@@ -28,9 +28,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails());
         }
 
+        public IDataResult<List<ProductDto>> GetAllProductDetailsWithPage(int page, int pageSize)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().Skip((page-1)*pageSize).Take(pageSize).ToList());
+        }
+
         public IDataResult<List<ProductDto>> GetLimitedProductDetails(int limit)
         {
-            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().GetRange(0,limit));
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().Take(limit).ToList());
         }
 
 
@@ -47,8 +52,16 @@ namespace Business.Concrete
         public IDataResult<List<ProductDto>> GetLimitedProductDetailsByCategory(int categoryId, int limit)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal
-                .GetAllProductDetails(p => p.CategoryId == categoryId).GetRange(0, limit));
+                .GetAllProductDetails(p => p.CategoryId == categoryId).Take(limit).ToList());
         }
+
+        public IDataResult<List<ProductDto>> GetAllProductDetailsByCategoryWithPage(int categoryId, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal
+                .GetAllProductDetails(p => p.CategoryId == categoryId).Skip((page - 1) * pageSize).Take(pageSize)
+                .ToList());
+        }
+
 
         public IDataResult<List<ProductDto>> GetAllProductDetailsByBrand(int brandId)
         {
@@ -58,7 +71,30 @@ namespace Business.Concrete
         public IDataResult<List<ProductDto>> GetLimitedProductDetailsByBrand(int brandId, int limit)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.BrandId == brandId)
-                .GetRange(0, limit));
+                .Take(limit).ToList());
+        }
+
+        public IDataResult<List<ProductDto>> GetAllProductDetailsFilteredWithPage(int brandId, int categoryId, int page, int pageSize)
+        {
+            if (brandId == 0 && categoryId == 0)
+            {
+                return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().Skip((page-1)*pageSize).Take(pageSize).ToList());
+            }
+            
+            if (brandId == 0)
+            {
+                return new SuccessDataResult<List<ProductDto>>(
+                    _productDal.GetAllProductDetails(p => p.CategoryId == categoryId).Skip((page-1)*pageSize).Take(pageSize).ToList());
+            }
+
+            if (categoryId == 0)
+            {
+                return new SuccessDataResult<List<ProductDto>>(
+                    _productDal.GetAllProductDetails(p => p.BrandId == brandId).Skip((page-1)*pageSize).Take(pageSize).ToList());
+            }
+
+            return new SuccessDataResult<List<ProductDto>>(
+                _productDal.GetAllProductDetails(p => p.CategoryId == categoryId && p.BrandId == brandId).Skip((page-1)*pageSize).Take(pageSize).ToList());
         }
 
         public IDataResult<List<Product>> GetAllByCategory(int categoryId)
