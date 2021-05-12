@@ -7,6 +7,7 @@ namespace Business.Abstract
 {
     public interface IBannerService
     {
+        // TODO bu servic leri generic yap
         IDataResult<List<Banner>> GetAll();
         IResult Add(IFormFile file, Banner banner);
         IResult Delete(Banner banner);

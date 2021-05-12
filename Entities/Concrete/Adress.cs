@@ -3,6 +3,7 @@ using Core.Entities;
 
 namespace Entities.Concrete
 {
+    //Database'de ki tabloların karşılığı olan classlar.
     public class Address : IEntity
     {
         public Int64 Id { get; set; }

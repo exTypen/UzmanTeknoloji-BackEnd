@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    //Manager'larımızın diğer diller ile iletişim kurmasını sağlayan rest api.
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : Controller

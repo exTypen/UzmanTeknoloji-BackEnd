@@ -6,10 +6,7 @@ using System.Text;
 
 namespace Core.DataAccess
 {
-    //generic constraint
-    //class : referans tip
-    //IEntity : IEntity olabilir veya IEntity implemente eden bir nesne olabilir
-    //new() : new'lenebilir olmalı
+    //interface olan Dal'lar için base class.
     public interface IEntityRepository<T> where T:class,IEntity,new()
     {
         List<T> GetAll(Expression<Func<T,bool>> filter=null);

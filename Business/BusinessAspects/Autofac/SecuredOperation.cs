@@ -11,7 +11,7 @@ using Business.Constants;
 
 namespace Business.BusinessAspects.Autofac
 {
-    //JWT
+    //İş yapan methodlara attribute olarak eklenir. Parametre olarak işin yapılması için gereken roller verilir.
     public class SecuredOperation : MethodInterception
     {
         private string[] _roles;

@@ -8,6 +8,7 @@ using Entities.DTOs;
 
 namespace Business.Concrete
 {
+    //İş yapan class. Dal'ı injekte edip database ile iletişime geçiliyor. Dal'dan farklı olarak iş kodları yazılıyor.
     public class AuthManager : IAuthService
     {
         private IUserService _userService;

@@ -18,6 +18,7 @@ namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module
     {
+        //Bağımlılığı azaltmak amaçlı interface'leri kullanıyoruz. İnterface'ler hangi class'ın referansını tutacak burada belirliyoruz.
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ProductManager>().As<IProductService>();

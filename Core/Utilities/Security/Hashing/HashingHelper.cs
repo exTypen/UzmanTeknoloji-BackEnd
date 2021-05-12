@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Core.Utilities.Security.Hashing
 {
+    //Şifreyi Database'de direkt o haliyle tutmak istemediğimizden yazılan şifreye önce saltlıyoruz. Daha sonra hmac512 ile şifreliyoruz.
     public class HashingHelper
     {
         public static void CreatePasswordHash

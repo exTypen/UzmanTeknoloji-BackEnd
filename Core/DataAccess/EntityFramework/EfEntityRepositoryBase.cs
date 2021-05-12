@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Core.DataAccess.EntityFramework
 {
+    //Class olan Dal'lar için base class.
     public class EfEntityRepositoryBase<TEntity,TContext>: IEntityRepository<TEntity>
         where TEntity: class, IEntity, new()
         where TContext : DbContext,new()

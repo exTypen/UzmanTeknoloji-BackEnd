@@ -9,6 +9,7 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
+        //Dosya işlemleri yapıyoruz
         public static string Add(IFormFile file)
         {
             var result = newPath(file);

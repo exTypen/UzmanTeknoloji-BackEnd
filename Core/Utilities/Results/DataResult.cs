@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Core.Utilities.Results
 {
+    // Veri döndüren methodların sadece veriyi değilde yanında mesaj ve success bilgisini döndürmemize yazıyor. 
     public class DataResult<T> : Result, IDataResult<T>
     {
         public DataResult(T data,bool success, string message):base(success,message)

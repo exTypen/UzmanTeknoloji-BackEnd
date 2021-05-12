@@ -5,6 +5,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
+    //İş yapan class'ların interface'i. Referans tutup bağımlılığı önlemek amaçlı kullanılıyor.
     public interface IAuthService
     {
         IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);
