@@ -1,8 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 
-using Business.CCS;
-
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
