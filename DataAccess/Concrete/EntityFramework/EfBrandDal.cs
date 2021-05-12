@@ -1,9 +1,10 @@
 ﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal : EfEntityRepositoryBase<Brand, UzmanContext>
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, UzmanContext>, IBrandDal
     {
         
     }
