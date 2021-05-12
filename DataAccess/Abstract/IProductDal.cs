@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
     public interface IProductDal : IEntityRepository<Product>
     {
         List<ProductDto> GetAllProductDetails(Expression<Func<Product, bool>> filter = null);
+        List<ProductDto> GetAllProductDetailsByFilter(ProductDetailFilterDto filter);
     }
 }

@@ -28,6 +28,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails());
         }
 
+        public IDataResult<List<ProductDto>> GetAllProductDetailsFilter(ProductDetailFilterDto filterDto)
+        {
+            return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetailsByFilter(filterDto));
+        }
+
         public IDataResult<List<ProductDto>> GetAllProductDetailsWithPage(int page, int pageSize)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails().Skip((page-1)*pageSize).Take(pageSize).ToList());

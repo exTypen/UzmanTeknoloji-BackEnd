@@ -11,6 +11,7 @@ namespace Business.Abstract
         IDataResult<List<Product>> GetAll();
         IDataResult<List<Product>> GetAllByCategory(int categoryId);
         IDataResult<List<ProductDto>> GetAllProductDetails();
+        IDataResult<List<ProductDto>> GetAllProductDetailsFilter(ProductDetailFilterDto filterDto);
         IDataResult<List<ProductDto>> GetAllProductDetailsWithPage(int page, int pageSize);
         IDataResult<List<ProductDto>> GetLimitedProductDetails(int limit);
         IDataResult<List<ProductDto>> GetAllProductDetailsById(int id);

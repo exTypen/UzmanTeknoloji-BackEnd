@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Core.DataAccess.EntityFramework;
+using Core.Extensions;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -44,6 +45,35 @@ namespace DataAccess.Concrete.EntityFramework
 
                         CreateDate = product.CreateDate,
 
+                        Active = product.Active
+                    };
+                return result.ToList();
+            }
+        }
+
+        public List<ProductDto> GetAllProductDetailsByFilter(ProductDetailFilterDto filterDto)
+        {
+            using (UzmanContext context = new UzmanContext())
+            {
+                var filterExpression = filterDto.GetFilterExpression<Product>();
+                var result = from product in filterExpression == null
+                        ? context.Products
+                        : context.Products.Where(filterExpression)
+                    join category in context.Categories on product.CategoryId equals category.Id
+                    join brand in context.Brands on product.BrandId equals brand.Id
+                    select new ProductDto()
+                    {
+                        Id = product.Id,
+                        CategoryId = product.CategoryId,
+                        CategoryName = category.Name,
+                        BrandId = product.BrandId,
+                        BrandName = brand.Name,
+                        Name = product.Name,
+                        Code = product.Code,
+                        Price = product.Price,
+                        Images = (from i in context.ProductImages where i.ProductId == product.Id select i.ImagePath)
+                            .ToList(),
+                        CreateDate = product.CreateDate,
                         Active = product.Active
                     };
                 return result.ToList();

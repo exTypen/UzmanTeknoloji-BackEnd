@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -30,6 +31,18 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductDetails()
         {
             var result = _productService.GetAllProductDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        
+        [HttpGet("GetAllProductDetailsByFilter")]
+        public IActionResult GetAllProductDetailsByFilter([FromQuery]ProductDetailFilterDto filterDto)
+        {
+            var result = _productService.GetAllProductDetailsFilter(filterDto);
             if (result.Success)
             {
                 return Ok(result);
