@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.IoC
 {
+    //Api dışında bir yerde interface'in karşılığını almak için. (windows form vb.)
     public static class ServiceTool
     {
         public static IServiceProvider ServiceProvider { get; private set; }

@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    //Dal'ların referansınu tutuyoruz. İnterface'i...
+    //Dal'ların referansını tutuyoruz. İnterface'i...
     public interface IBannerDal : IEntityRepository<Banner>
     {
         

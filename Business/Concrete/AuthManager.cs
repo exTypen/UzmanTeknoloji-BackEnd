@@ -20,6 +20,8 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
         }
         
+        //Parametre olarak verdiğimiz şifre ile önce hash ve salt oluşuturuyor. Daha sonra diğer parametre olarak verdiğimiz user bilgileri 
+        //ile birleştirip user oluştırıyor. Daha sonra bunu usermanager'a gönderiyor.
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -37,6 +39,8 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, "Kayıt yapıldı");
         }
 
+        //email ile database'den kullanıcıyı çekiyoruz. Eğer gelen veri yoksa kullanıcı bulunamadı hatası döndürüyoruz
+        //gönderilen şifreyi database de ki hash ve salt ile kontrole ediyoruz.
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.Email);
@@ -53,6 +57,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLogin);
         }
 
+        //kullanıcının girdiği email ile databse de kayıt var mı kontrol ediyoruz. Varsa hata döndürüyoruz. 
         public IResult UserExists(string email)
         {
             if (_userService.GetByMail(email)!=null)
@@ -63,23 +68,13 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        //Verdiğimiz user bilgisi ile database'den rollerini çekiyoruz. Daha sonra user bilgisi ve roller ile token oluşturuyoruz.
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims.Data);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
-
-        public IDataResult<PasswordDto> CreatePasswordHash(string password)
-        {
-            byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            var passwordDto = new PasswordDto
-            {
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
-            };
-            return new SuccessDataResult<PasswordDto>(passwordDto);
-        }
+        
     }
 }
