@@ -6,7 +6,7 @@ namespace WebAPI.Controllers
 {
     //Manager'larımızın diğer diller ile iletişim kurmasını sağlayan rest api.
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class AuthController : Controller
     {
         private IAuthService _authService;

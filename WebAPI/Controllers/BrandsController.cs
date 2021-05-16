@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -7,9 +9,10 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class BrandsController : Controller
     {
+
         private IBrandService _brandService;
 
-        public BrandsController(IBrandService brandService)
+        public BrandsController(IBrandService brandService, IProductService productService)
         {
             _brandService = brandService;
         }
