@@ -19,10 +19,16 @@ namespace Business.Concrete
             _bannerDal = bannerDal;
         }
 
+        public IDataResult<Banner> Get(int id)
+        {
+            return new SuccessDataResult<Banner>(_bannerDal.Get(b=>b.Id == id));
+        }
+
         public IDataResult<List<Banner>> GetAll()
         {
             return new SuccessDataResult<List<Banner>>(_bannerDal.GetAll());
         }
+        
 
         public IResult Add(IFormFile file,Banner banner)
         {

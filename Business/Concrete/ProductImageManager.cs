@@ -32,18 +32,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductImage>>(_productImageDal.GetAll());
         }
 
-        public IDataResult<List<ProductImage>> GetAllByProduct(int productId)
-        {
-            IResult result = BusinessRules.Run(CheckIfProductImageNull(productId));
-
-            if (result != null)
-            {
-                return new ErrorDataResult<List<ProductImage>>(result.Message);
-            }
-
-            return new SuccessDataResult<List<ProductImage>>(CheckIfProductImageNull(productId).Data);
-        }
-
         public IResult Add(IFormFile file, ProductImage productImage)
         {
             IResult result = BusinessRules.Run(CheckImageLimitExceeded(productImage.ProductId));

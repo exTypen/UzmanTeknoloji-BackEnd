@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
+using Business.Generics;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Abstract
 {
-    public interface IBannerService
+    public interface IBannerService : IGenericImagesService<Banner>
     {
-        // TODO bu servic leri generic yap
-        IDataResult<List<Banner>> GetAll();
-        IResult Add(IFormFile file, Banner banner);
-        IResult Delete(Banner banner);
-        IResult Update(IFormFile file, Banner banner);
         
     }
 }

@@ -56,7 +56,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal.GetAllProductDetails(p => p.CategoryId == categoryId));
         }
-
+        
         public IDataResult<List<ProductDto>> GetLimitedProductDetailsByCategory(int categoryId, int limit)
         {
             return new SuccessDataResult<List<ProductDto>>(_productDal
