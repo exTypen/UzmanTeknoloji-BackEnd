@@ -13,6 +13,7 @@ using System.Text;
 using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -38,7 +39,16 @@ namespace Business.DependencyResolvers.Autofac
             
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
-
+            
+            builder.RegisterType<BasketManager>().As<IBasketService>();
+            builder.RegisterType<EfBasketDal>().As<IBasketDal>();
+            
+            builder.RegisterType<OrderManager>().As<IOrderService>();
+            builder.RegisterType<EfOrderDal>().As<IOrderDal>();
+            
+            builder.RegisterType<OrderDetailManager>().As<IOrderDetailService>();
+            builder.RegisterType<EfOrderDetailDal>().As<IOrderDetailDal>();
+            
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

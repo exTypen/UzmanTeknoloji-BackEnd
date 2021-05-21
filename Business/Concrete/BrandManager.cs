@@ -20,6 +20,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
+        public IDataResult<Brand> Get(int id)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(b=> b.Id == id));
+        }
+
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);

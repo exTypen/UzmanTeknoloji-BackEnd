@@ -7,6 +7,5 @@ namespace Business.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
     {
-        IDataResult<List<Category>> GetById(int id);
     }
 }

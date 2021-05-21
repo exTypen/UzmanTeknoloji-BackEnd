@@ -20,9 +20,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Category>>(_categoryDal.GetAll());
         }
 
-        public IDataResult<List<Category>> GetById(int id)
+        public IDataResult<Category> Get(int id)
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(c => c.Id == id));
+            return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == id));
         }
 
         public IResult Add(Category category)

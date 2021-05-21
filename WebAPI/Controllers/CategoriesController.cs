@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
-            var result = _categoryService.GetById(id);
+            var result = _categoryService.Get(id);
             if (result.Success)
             {
                 return Ok(result);
